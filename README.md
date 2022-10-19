@@ -1,4 +1,4 @@
-XIA-VesselNet : Explainable AI for deep vessel segmentation
+XAI-VesselNet : Explainable AI for deep vessel segmentation
 ===============
 
 # Table of content
@@ -42,12 +42,12 @@ This work is a part of a PhD thesis, "[Détection faiblement supervisée de path
 
 1. Clone this repository in your workspace
 
-2. Create the requiered environement to execute __XIA-VesselNet__
-> conda env create -n `<environement_name>` --file env_XIA-VesselNet.yml
+2. Create the requiered environement to execute __XAI-VesselNet__
+> conda env create -n `<environement_name>` --file env_XAI-VesselNet.yml
 
-3. Set your __PYTHONPATH__ environement variable to allow Python to find __XIA-VesselNet__'s modules :<br>
+3. Set your __PYTHONPATH__ environement variable to allow Python to find __XAI-VesselNet__'s modules :<br>
 NB : this will only affect the current user's environment.
-> setx PYTHONPATH "$Env:PYTHONPATH;`<workspace_path>`\XIA-VesselNet\modules".
+> setx PYTHONPATH "$Env:PYTHONPATH;`<workspace_path>`\XAI-VesselNet\modules".
 
 4. Replace path in the [__*./default.ini*__](./default.ini) configuration file to fit your workspace environement :
 
