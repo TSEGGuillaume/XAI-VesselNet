@@ -132,11 +132,3 @@ def create_3d_dense_unet():
 
     # Return the 3D Dense U-Net model
     return model
-
-def main():
-    model = create_3d_dense_unet()
-
-if __name__=="__main__":
-    log.basicConfig(format="%(levelname)s: %(message)s", level = log.DEBUG)
-
-    main()

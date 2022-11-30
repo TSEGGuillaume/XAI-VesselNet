@@ -7,7 +7,7 @@ import numpy as np
 import tensorflow as tf
 import nibabel as nib
 
-import dense_3d_unet
+import models.dense_3d_unet as dense_3d_unet
 from graph import CNode
 import configuration as appcfg
 import utils.oob_prevention as oob_prevention
