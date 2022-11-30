@@ -19,7 +19,17 @@ class CConfiguration:
     Notes
         1. You must provide either an existing configuration file or configuration settings. If both are provided, only the filename will be taken into account. This way the configuration settings will be ignored to construct the instance from the settings of the given file.
     """
-    def __init__(self, p_filename:str=None, p_app_env:str=None, p_app_debug:str=None, p_fs_workspace:str=None, p_fs_weightsdir:str=None, p_fs_datadir:str=None, p_fs_resultsdir:str=None):    
+    def __init__(
+        self,
+        p_filename: str = None,
+        p_app_env: str = None,
+        p_app_debug: str = None,
+        p_fs_workspace: str = None,
+        p_fs_weightsdir: str = None,
+        p_fs_datadir: str = None,
+        p_fs_resultsdir: str = None,
+        p_fs_logsdir: str = None,
+    ):
         # hard coded variables
         self.fext = ".ini"
 
@@ -34,6 +44,7 @@ class CConfiguration:
                 self.weights_dir    = p_fs_weightsdir
                 self.data_dir       = p_fs_datadir
                 self.result_dir     = p_fs_resultsdir
+                self.log_dir       = p_fs_logsdir
 
                 self._parse()
             else:
@@ -57,6 +68,7 @@ class CConfiguration:
         self.config_parser.set("PATHS", "WEIGHTS_DIR", self.weights_dir)
         self.config_parser.set("PATHS", "DATA_DIR", self.data_dir)
         self.config_parser.set("PATHS", "RESULT_DIR", self.result_dir)
+        self.config_parser.set("PATHS", "LOG_DIR", self.log_dir)
 
     def _read_from_existing_file(self, filename):
         """
@@ -65,16 +77,20 @@ class CConfiguration:
         Parameters
             filename (str) : The full path (<path>/<filename>) to the existing configuration file. 
         """
-        self.config_parser = configparser.ConfigParser()
-        self.config_parser.read(filename)
+        if os.path.isfile(filename):
+            self.config_parser = configparser.ConfigParser()
+            self.config_parser.read(filename)
 
-        self.environement   = self.config_parser["APP"]["ENVIRONMENT"]
-        self.debug          = self.config_parser["APP"]["DEBUG"]   
+            self.environement   = self.config_parser["APP"]["ENVIRONMENT"]
+            self.debug          = self.config_parser["APP"]["DEBUG"]   
 
-        self.workspace      = self.config_parser["PATHS"]["WORKSPACE"]    
-        self.weights_dir    = self.config_parser["PATHS"]["WEIGHTS_DIR"]
-        self.data_dir       = self.config_parser["PATHS"]["DATA_DIR"]
-        self.result_dir     = self.config_parser["PATHS"]["RESULT_DIR"]
+            self.workspace      = self.config_parser["PATHS"]["WORKSPACE"]    
+            self.weights_dir    = self.config_parser["PATHS"]["WEIGHTS_DIR"]
+            self.data_dir       = self.config_parser["PATHS"]["DATA_DIR"]
+            self.result_dir     = self.config_parser["PATHS"]["RESULT_DIR"]
+            self.log_dir        = self.config_parser["PATHS"]["LOG_DIR"]
+        else:
+            raise FileNotFoundError("Configuration file not found : {}".format(filename))
 
     def save(self, filename:str):
         """
@@ -116,7 +132,8 @@ class CDefaultConfiguration(CConfiguration):
             p_fs_workspace=workspace, 
             p_fs_weightsdir=os.path.join(workspace, "resources/weights"),
             p_fs_datadir=os.path.join(workspace, "resources/data"),
-            p_fs_resultsdir=os.path.join(workspace, "results")
+            p_fs_resultsdir=os.path.join(workspace, "results"),
+            p_fs_logsdir=os.path.join(workspace, "logs")
         )
 
     def save(self):
