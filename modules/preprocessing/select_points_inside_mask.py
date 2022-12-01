@@ -16,7 +16,7 @@ def create_mask_inner_not_outer(inner_mask, outer_mask, savepath:str=None):
 
         # Of course the save volume will not fit with the orientation of the image from which the mask is computed from
         # The saved mask is (at the moment) only for information 
-        mask_volume = nib.Nifti1Image(np.array(inner_not_outer_mask, dtype=np.int16), np.eye(4))
+        mask_volume = nib.Nifti1Image(np.array(inner_not_outer_mask, dtype=np.float32), np.eye(4))
         nib.save(mask_volume, os.path.join(savepath, "inner_outer_mask.nii"))
 
     return inner_not_outer_mask
