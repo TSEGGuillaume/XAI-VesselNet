@@ -35,7 +35,7 @@ def main():
     log.info("The points list has been saved at {}".format(save_path))
 
 if __name__=="__main__":
-    cfg = appcfg.CConfiguration(p_filename="default.ini")
+    cfg = appcfg.CConfiguration(p_filename="../default.ini")
 
     args = parse_arguments()
 

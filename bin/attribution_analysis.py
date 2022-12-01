@@ -294,7 +294,7 @@ def main():
     serialize_results(stat_main_wnd, stats_sliding_wnd, dice, vessel_thickness, obs_pt)
 
 if __name__=="__main__":  
-    cfg = appcfg.CConfiguration(p_filename="default.ini")
+    cfg = appcfg.CConfiguration(p_filename="../default.ini")
 
     args = parse_arguments()
 

@@ -246,7 +246,7 @@ def main():
 if __name__=="__main__":
     os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
   
-    cfg = appcfg.CConfiguration(p_filename="default.ini")
+    cfg = appcfg.CConfiguration(p_filename="../default.ini")
 
     if bool(cfg.debug) == True:
         weights_name = "DenseUNet_Jerman_25625680.h5"
