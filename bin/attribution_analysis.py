@@ -100,10 +100,10 @@ def compute_performance_on_window(gt_data, pred_data, observation_point:tuple, w
     gt_sub     = gt_data_binary[pt_min[0]:pt_max[0]:1, pt_min[1]:pt_max[1]:1, pt_min[2]:pt_max[2]:1]
     pred_sub   = pred_data_binary[pt_min[0]:pt_max[0]:1, pt_min[1]:pt_max[1]:1, pt_min[2]:pt_max[2]:1]
      
-    dice = metrics.compute_dice(gt_sub, pred_sub)
+    dice = metrics.compute_dice(gt_sub, pred_sub).numpy()
     log.debug("Dice : {}".format(dice))
 
-    return dice
+    return float(dice)
 
 def compute_statistics_on_windows(attribution_map, observation_point:tuple, window_shape:tuple, stride:tuple=None):
     """

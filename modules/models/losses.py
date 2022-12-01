@@ -1,12 +1,6 @@
 from tensorflow.keras.losses import Loss
 
-def compute_dice(y_truth, y_pred, smooth=0.0001):
-    from tensorflow.keras import backend as K
-    gt      = K.flatten(y_truth)
-    pred    = K.flatten(y_pred)
-
-    inter = K.sum(gt * pred)
-    return (2. * inter + smooth) / (K.sum(gt) + K.sum(pred) + smooth)
+import utils.metrics as metrics
 
 class CustomDiceLoss(Loss):
     def __init__(self, smooth=0.0001):
@@ -15,7 +9,7 @@ class CustomDiceLoss(Loss):
         self.smooth = smooth
         
     def __call__(self, y_truth, y_pred, sample_weight=None):
-        return 1.0-compute_dice(y_truth, y_pred, self.smooth)
+        return 1.0-metrics.compute_dice(y_truth, y_pred, self.smooth)
     
 class CustomFocalLoss(Loss):
     """Compute focal loss.

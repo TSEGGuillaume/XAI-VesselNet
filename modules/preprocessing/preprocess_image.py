@@ -110,7 +110,7 @@ def binarize(data, threshold=0.5):
     Returns
         The binarized data
     """
-    return (data > threshold).astype(int)
+    return np.array(data > threshold, dtype=np.float32)
 
 def distance_map(data, method="edt"):
     """

@@ -37,7 +37,7 @@ def compute_iou(ground_truth, prediction, smooth=0.00001):
     intersection = np.sum(ground_truth * prediction)
     return (intersection + smooth) / (np.sum(ground_truth) + np.sum(prediction) - intersection + smooth)
 
-def compute_dice(ground_truth, prediction, smooth=0.00001):
+def compute_dice(y_truth, y_pred, smooth=0.0001):
     """
     Compute the Dice coefficient.
 
@@ -47,10 +47,11 @@ def compute_dice(ground_truth, prediction, smooth=0.00001):
         smooth          : The smoothing coefficient.
 
     Returns
-        The Dice coefficient (float).
+        The Dice coefficient (Tensor). Use float(utils.metrics.compute_dice(.,.).numpy()) for float conversion
     """
-    ground_truth = ground_truth.flatten()
-    prediction   = prediction.flatten()
-    
-    intersection = np.sum(ground_truth * prediction)
-    return (2. * intersection + smooth) / (np.sum(ground_truth) + np.sum(prediction) + smooth)
+    from tensorflow.keras import backend as K
+    gt      = K.flatten(y_truth)
+    pred    = K.flatten(y_pred)
+
+    inter = K.sum(gt * pred)
+    return (2. * inter + smooth) / (K.sum(gt) + K.sum(pred) + smooth)
