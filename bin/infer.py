@@ -25,7 +25,7 @@ def parse_arguments():
 
 def main():   
     # Create the model
-    model = dense_3d_unet.create_3d_dense_unet()
+    model = dense_3d_unet.DenseUnet3D()
     log.info("Model {} created and compiled.".format(model.name))
     
     # Manage weights

@@ -163,7 +163,7 @@ def integrated_gradients(model, data, baseline=None, nsteps=50, observation_poin
 
 def main():    
     # Manage the model
-    model = dense_3d_unet.create_3d_dense_unet()
+    model = dense_3d_unet.DenseUnet3D()
     log.info("Model {} created and compiled.".format(model.name))
 
     # Manage weights

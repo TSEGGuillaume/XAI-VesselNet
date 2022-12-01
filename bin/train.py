@@ -65,7 +65,7 @@ def train(model, training_set, validation_set):
 
 def main():
     if args.model == 'dense_unet':
-        model = dense_3d_unet.create_3d_dense_unet()
+        model = dense_3d_unet.DenseUnet3D()
     else:
         raise ValueError("Other model not supported yet")
 
